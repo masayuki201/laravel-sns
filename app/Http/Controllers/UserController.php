@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use http\Env\Request;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -22,6 +22,7 @@ class UserController extends Controller
     public function likes(string $name)
     {
         $user = User::where('name', $name)->first();
+
         $articles = $user->likes->sortByDesc('created_at');
 
         return view('users.likes', [
@@ -33,6 +34,7 @@ class UserController extends Controller
     public function followings(string $name)
     {
         $user = User::where('name', $name)->first();
+
         $followings = $user->followings->sortByDesc('created_at');
 
         return view('users.followings', [
@@ -44,6 +46,7 @@ class UserController extends Controller
     public function followers(string $name)
     {
         $user = User::where('name', $name)->first();
+
         $followers = $user->followers->sortByDesc('created_at');
 
         return view('users.followers', [
@@ -56,7 +59,8 @@ class UserController extends Controller
     {
         $user = User::where('name', $name)->first();
 
-        if ($user->id === $request->user()->id) {
+        if ($user->id === $request->user()->id)
+        {
             return abort('404', 'Cannot follow yourself.');
         }
 
@@ -70,7 +74,8 @@ class UserController extends Controller
     {
         $user = User::where('name', $name)->first();
 
-        if ($user->id === $request->user()->id) {
+        if ($user->id === $request->user()->id)
+        {
             return abort('404', 'Cannot follow yourself.');
         }
 
