@@ -58,7 +58,7 @@ export default {
                 return
             }
 
-            this.isFollowBy
+            this.isFollowedBy
                 ? this.unfollow()
                 : this.follow()
         },
